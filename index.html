@@ -4,130 +4,421 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
   <title>SolarAI | Intelligent Solar Consultant</title>
+  <meta name="description"
+        content="Explore AI-assisted solar system sizing, electricity bill analysis, and solar quotations with SolarAI.">
+
   <style>
+    :root {
+      --bg: #06111f;
+      --panel: #0c1d30;
+      --gold: #ffc857;
+      --green: #64e6ad;
+      --text: #f5f8fc;
+      --muted: #a8b8cb;
+      --line: rgba(255,255,255,.12);
+    }
+
     * { box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
 
     body {
       margin: 0;
-      font-family: Arial, sans-serif;
-      color: white;
-      background: #061426;
+      color: var(--text);
+      background: var(--bg);
+      font-family: Inter, Arial, sans-serif;
+      line-height: 1.6;
     }
 
-    header {
-      padding: 22px 7%;
+    a { text-decoration: none; }
+
+    .nav {
+      min-height: 76px;
+      padding: 16px 7%;
       display: flex;
       justify-content: space-between;
       align-items: center;
-      background: rgba(4, 17, 34, 0.9);
-      border-bottom: 1px solid #19354d;
+      gap: 20px;
+      border-bottom: 1px solid var(--line);
+      background: rgba(6,17,31,.95);
     }
 
-    .logo {
-      font-size: 25px;
-      font-weight: bold;
-      color: #ffd166;
+    .brand {
+      font-size: 23px;
+      font-weight: 800;
+      color: var(--gold);
+      letter-spacing: -.7px;
+    }
+
+    .nav-right {
+      display: flex;
+      align-items: center;
+      gap: 22px;
+    }
+
+    .nav-right a:not(.btn) { color: #dce7f4; }
+
+    .btn {
+      display: inline-flex;
+      justify-content: center;
+      align-items: center;
+      padding: 13px 21px;
+      border-radius: 9px;
+      font-weight: 750;
+      transition: transform .2s, opacity .2s;
+    }
+
+    .btn:hover { transform: translateY(-2px); }
+
+    .btn-gold {
+      background: var(--gold);
+      color: #17202b;
+    }
+
+    .btn-outline {
+      color: white;
+      border: 1px solid rgba(255,255,255,.35);
     }
 
     .hero {
+      position: relative;
+      overflow: hidden;
       text-align: center;
-      padding: 65px 20px 45px;
+      padding: 105px 20px 92px;
       background:
-        linear-gradient(180deg, rgba(4,17,34,.55),
-        #061426),
-        url("https://images.unsplash.com/photo-1509391366360-2e959784a276?auto=format&fit=crop&w=1800&q=85")
-        center/cover;
+        linear-gradient(180deg, rgba(4,14,28,.48),
+        rgba(6,17,31,.93) 92%),
+        url("https://images.unsplash.com/photo-1509391366360-2e959784a276?auto=format&fit=crop&w=2000&q=85")
+        center 48% / cover no-repeat;
     }
 
-    .hero h1 {
-      font-size: clamp(34px, 5vw, 58px);
-      margin: 15px 0;
+    .hero::before {
+      content: "";
+      position: absolute;
+      width: 340px;
+      height: 340px;
+      border-radius: 50%;
+      background: rgba(255,200,87,.12);
+      filter: blur(80px);
+      top: 0;
+      left: calc(50% - 170px);
+      pointer-events: none;
     }
 
-    .hero h1 span { color: #ffd166; }
+    .hero-content {
+      position: relative;
+      max-width: 900px;
+      margin: auto;
+    }
+
+    .eyebrow {
+      display: inline-block;
+      padding: 7px 13px;
+      border: 1px solid rgba(255,200,87,.35);
+      border-radius: 99px;
+      color: var(--gold);
+      background: rgba(5,15,28,.55);
+      font-size: 12px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+    }
+
+    h1 {
+      margin: 23px 0 15px;
+      font-size: clamp(38px, 6vw, 70px);
+      line-height: 1.08;
+      letter-spacing: -2px;
+    }
+
+    h1 span { color: var(--gold); }
 
     .hero p {
-      max-width: 720px;
-      margin: 0 auto 25px;
-      line-height: 1.7;
-      color: #d5e2ef;
+      max-width: 690px;
+      margin: 0 auto 28px;
+      color: #d4e0ed;
+      font-size: 18px;
     }
 
-    .tag {
-      color: #ffd166;
-      letter-spacing: 2px;
-      text-transform: uppercase;
-      font-size: 12px;
+    .actions {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 12px;
     }
 
-    .launch {
-      display: inline-block;
-      padding: 14px 25px;
-      background: #ffd166;
-      color: #102033;
-      border-radius: 8px;
-      text-decoration: none;
-      font-weight: bold;
+    .section {
+      width: min(1120px, 90%);
+      margin: auto;
+      padding: 65px 0;
     }
 
-    .app-section { padding: 15px 4% 45px; }
-
-    .app-heading {
+    .section-title {
       text-align: center;
-      margin: 20px 0;
+      max-width: 700px;
+      margin: 0 auto 35px;
     }
 
-    iframe {
-      width: 100%;
-      height: 950px;
-      border: 1px solid #25425c;
-      border-radius: 14px;
+    .section-title h2 {
+      font-size: clamp(27px, 4vw, 39px);
+      line-height: 1.2;
+      margin: 8px 0 12px;
+    }
+
+    .section-title p,
+    .feature p { color: var(--muted); }
+
+    .gold { color: var(--gold); }
+
+    .features {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 17px;
+    }
+
+    .feature {
+      padding: 23px;
+      border: 1px solid var(--line);
+      border-radius: 15px;
+      background: linear-gradient(145deg, #10253a, #091827);
+    }
+
+    .feature-icon {
+      font-size: 27px;
+      margin-bottom: 13px;
+    }
+
+    .feature h3 { margin: 0 0 8px; font-size: 18px; }
+
+    .feature p { margin: 0; font-size: 14px; }
+
+    .app-wrap {
+      padding: 24px;
+      border: 1px solid rgba(100,230,173,.22);
+      border-radius: 20px;
+      background: linear-gradient(145deg, #0c2033, #071522);
+      box-shadow: 0 24px 70px rgba(0,0,0,.25);
+    }
+
+    .app-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 16px;
+      margin-bottom: 20px;
+    }
+
+    .app-top h3 { margin: 0; font-size: 22px; }
+
+    .app-top p { margin: 5px 0 0; color: var(--muted); }
+
+    .status {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      color: var(--green);
+      font-size: 13px;
+    }
+
+    .status::before {
+      content: "";
+      width: 8px;
+      height: 8px;
+      background: var(--green);
+      border-radius: 50%;
+    }
+
+    .iframe-box {
+      overflow: hidden;
+      border: 1px solid var(--line);
+      border-radius: 12px;
       background: white;
     }
 
-    footer {
+    iframe {
+      display: block;
+      width: 100%;
+      height: 1000px;
+      border: 0;
+      background: white;
+    }
+
+    .fallback {
+      margin-top: 20px;
+      padding: 18px;
       text-align: center;
-      padding: 25px;
-      color: #9bb0c5;
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      color: var(--muted);
+    }
+
+    .fallback a { color: var(--gold); font-weight: bold; }
+
+    .note {
+      margin-top: 17px;
+      font-size: 12px;
+      color: var(--muted);
+    }
+
+    footer {
+      padding: 30px 6%;
+      border-top: 1px solid var(--line);
+      text-align: center;
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    @media (max-width: 850px) {
+      .features { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .hero { padding: 75px 18px; }
+    }
+
+    @media (max-width: 520px) {
+      .nav { padding: 15px 5%; }
+      .brand { font-size: 20px; }
+      .nav-right { gap: 10px; }
+      .nav-right > a:not(.btn) { display: none; }
+      .nav-right .btn { padding: 10px 12px; font-size: 13px; }
+      .features { grid-template-columns: 1fr; }
+      .section { width: 92%; padding: 48px 0; }
+      .app-wrap { padding: 12px; }
+      iframe { height: 1100px; }
+      h1 { letter-spacing: -1px; }
     }
   </style>
 </head>
 
 <body>
-  <header>
-    <div class="logo">☀ SolarAI</div>
-    <div>AI Solar Consultant</div>
+
+  <header class="nav">
+    <a class="brand" href="#">☀ SolarAI</a>
+    <nav class="nav-right">
+      <a href="#features">Features</a>
+      <a href="#consultant">Consultant</a>
+      <a class="btn btn-gold"
+         href="https://ai-solar-consultant-jwg66pq9sfdquhrbp5gct4.streamlit.app/"
+         target="_blank" rel="noopener noreferrer">
+        Open AI App ↗
+      </a>
+    </nav>
   </header>
 
-  <section class="hero">
-    <div class="tag">Intelligent Solar Solutions</div>
-    <h1>Power Your Future with <span>AI</span></h1>
-    <p>
-      Analyze electricity bills, estimate solar system
-      capacity, explore costs and generate personalized
-      solar recommendations with your AI-powered consultant.
-    </p>
-    <a class="launch" href="#consultant">
-      Launch Solar Consultant ↓
-    </a>
-  </section>
+  <main>
+    <section class="hero">
+      <div class="hero-content">
+        <div class="eyebrow">AI-powered solar intelligence</div>
+        <h1>Turn Sunlight Into<br><span>Smarter Decisions.</span></h1>
+        <p>
+          Explore a smarter path to solar energy. Analyze your electricity
+          usage, estimate system requirements and prepare a personalized
+          solar proposal with your AI-powered consultant.
+        </p>
+        <div class="actions">
+          <a class="btn btn-gold" href="#consultant">
+            Launch Solar Consultant ↓
+          </a>
+          <a class="btn btn-outline"
+             href="https://ai-solar-consultant-jwg66pq9sfdquhrbp5gct4.streamlit.app/"
+             target="_blank" rel="noopener noreferrer">
+            Open in New Tab ↗
+          </a>
+        </div>
+      </div>
+    </section>
 
-  <section class="app-section" id="consultant">
-    <div class="app-heading">
-      <h2>Try Our AI Solar Consultant</h2>
-      <p>Enter your details and explore your solar solution.</p>
-    </div>
+    <section class="section" id="features">
+      <div class="section-title">
+        <div class="eyebrow">Your solar journey</div>
+        <h2>From Electricity Bill to <span class="gold">Solar Plan</span></h2>
+        <p>
+          Use AI-assisted tools to explore your energy needs and understand
+          potential solar system options.
+        </p>
+      </div>
 
-    <iframe
-      src="https://ai-solar-consultant-jwg66pq9sfdquhrbp5gct4.streamlit.app/?embed=true"
-      title="SolarAI Consultant"
-      loading="lazy">
-    </iframe>
-  </section>
+      <div class="features">
+        <article class="feature">
+          <div class="feature-icon">📄</div>
+          <h3>Bill Analysis</h3>
+          <p>Upload an electricity bill or enter consumption information,
+             where supported, to begin your assessment.</p>
+        </article>
+
+        <article class="feature">
+          <div class="feature-icon">☀️</div>
+          <h3>Solar Sizing</h3>
+          <p>Explore estimated solar capacity based on your consumption
+             and planned electrical loads.</p>
+        </article>
+
+        <article class="feature">
+          <div class="feature-icon">⚡</div>
+          <h3>System Options</h3>
+          <p>Review available system configurations and applicable
+             equipment options.</p>
+        </article>
+
+        <article class="feature">
+          <div class="feature-icon">📊</div>
+          <h3>Cost & Quotation</h3>
+          <p>Explore estimated costs and generate a proposal using
+             the pricing and quotation features in the app.</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="section" id="consultant">
+      <div class="section-title">
+        <div class="eyebrow">Try the live application</div>
+        <h2>Meet Your <span class="gold">AI Solar Consultant</span></h2>
+        <p>
+          Enter your information in the application below to start your
+          solar assessment.
+        </p>
+      </div>
+
+      <div class="app-wrap">
+        <div class="app-top">
+          <div>
+            <h3>SolarAI Consultant</h3>
+            <p>Bill analysis · Solar sizing · Pricing · Quotation</p>
+          </div>
+          <span class="status">App link configured</span>
+        </div>
+
+        <div class="iframe-box">
+          <iframe
+            src="https://ai-solar-consultant-jwg66pq9sfdquhrbp5gct4.streamlit.app/?embed=true"
+            title="SolarAI live solar consultant"
+            loading="lazy"
+            allow="clipboard-read; clipboard-write">
+          </iframe>
+        </div>
+
+        <div class="fallback">
+          If the application does not load here,
+          <a href="https://ai-solar-consultant-jwg66pq9sfdquhrbp5gct4.streamlit.app/"
+             target="_blank" rel="noopener noreferrer">
+            open the full SolarAI app in a new tab ↗
+          </a>.
+        </div>
+
+        <p class="note">
+          Solar estimates are preliminary and depend on the information
+          supplied, equipment, site conditions and current prices.
+          Confirm system design, protection and final quotations with
+          a qualified solar professional.
+        </p>
+      </div>
+    </section>
+  </main>
 
   <footer>
-    SolarAI — Smarter Energy Decisions with Artificial Intelligence
+    <div>☀ SolarAI — Intelligent Solar Consulting</div>
+    <div>AI-assisted planning for smarter energy decisions.</div>
   </footer>
+
 </body>
 </html>
