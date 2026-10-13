@@ -1,0 +1,133 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SolarAI | Intelligent Solar Consultant</title>
+  <style>
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      color: white;
+      background: #061426;
+    }
+
+    header {
+      padding: 22px 7%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: rgba(4, 17, 34, 0.9);
+      border-bottom: 1px solid #19354d;
+    }
+
+    .logo {
+      font-size: 25px;
+      font-weight: bold;
+      color: #ffd166;
+    }
+
+    .hero {
+      text-align: center;
+      padding: 65px 20px 45px;
+      background:
+        linear-gradient(180deg, rgba(4,17,34,.55),
+        #061426),
+        url("https://images.unsplash.com/photo-1509391366360-2e959784a276?auto=format&fit=crop&w=1800&q=85")
+        center/cover;
+    }
+
+    .hero h1 {
+      font-size: clamp(34px, 5vw, 58px);
+      margin: 15px 0;
+    }
+
+    .hero h1 span { color: #ffd166; }
+
+    .hero p {
+      max-width: 720px;
+      margin: 0 auto 25px;
+      line-height: 1.7;
+      color: #d5e2ef;
+    }
+
+    .tag {
+      color: #ffd166;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      font-size: 12px;
+    }
+
+    .launch {
+      display: inline-block;
+      padding: 14px 25px;
+      background: #ffd166;
+      color: #102033;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    .app-section { padding: 15px 4% 45px; }
+
+    .app-heading {
+      text-align: center;
+      margin: 20px 0;
+    }
+
+    iframe {
+      width: 100%;
+      height: 950px;
+      border: 1px solid #25425c;
+      border-radius: 14px;
+      background: white;
+    }
+
+    footer {
+      text-align: center;
+      padding: 25px;
+      color: #9bb0c5;
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <div class="logo">☀ SolarAI</div>
+    <div>AI Solar Consultant</div>
+  </header>
+
+  <section class="hero">
+    <div class="tag">Intelligent Solar Solutions</div>
+    <h1>Power Your Future with <span>AI</span></h1>
+    <p>
+      Analyze electricity bills, estimate solar system
+      capacity, explore costs and generate personalized
+      solar recommendations with your AI-powered consultant.
+    </p>
+    <a class="launch" href="#consultant">
+      Launch Solar Consultant ↓
+    </a>
+  </section>
+
+  <section class="app-section" id="consultant">
+    <div class="app-heading">
+      <h2>Try Our AI Solar Consultant</h2>
+      <p>Enter your details and explore your solar solution.</p>
+    </div>
+
+    <iframe
+      src="https://ai-solar-consultant-jwg66pq9sfdquhrbp5gct4.streamlit.app/?embed=true"
+      title="SolarAI Consultant"
+      loading="lazy">
+    </iframe>
+  </section>
+
+  <footer>
+    SolarAI — Smarter Energy Decisions with Artificial Intelligence
+  </footer>
+</body>
+</html>
